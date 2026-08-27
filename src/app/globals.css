@@ -1,0 +1,171 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@plugin "tailwindcss-animate";
+
+/* ============================================================
+   Affiliot — Design System: Moneed Style (Light & Clean)
+   ============================================================ */
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* We use direct color mapping in root for simplicity with tailwind v4 */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/* ---- Light Theme (Moneed Style) ---- */
+:root {
+  --radius: 0.75rem; /* Base radius 12px */
+  
+  /* Backgrounds */
+  --background: #f4f7f6; /* Very light gray/blue off-white */
+  --foreground: #111827; /* Near black text */
+  
+  /* Cards */
+  --card: #ffffff;
+  --card-foreground: #111827;
+  
+  /* Popovers */
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+  
+  /* Primary Action (Vibrant Blue) */
+  --primary: #2563eb; 
+  --primary-foreground: #ffffff;
+  
+  /* Secondary Action (Light Gray) */
+  --secondary: #f3f4f6;
+  --secondary-foreground: #374151;
+  
+  /* Muted / Neutral */
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  
+  /* Accent (Dark / Black pills like Dashboard tab) */
+  --accent: #111827;
+  --accent-foreground: #ffffff;
+  
+  /* Destructive / Negative (Red) */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Success / Positive (Green) */
+  --success: #22c55e;
+  --success-foreground: #ffffff;
+  
+  /* Borders & Inputs */
+  --border: #e5e7eb;
+  --input: #f3f4f6; /* Light gray input backgrounds */
+  --ring: #2563eb; /* Blue ring */
+}
+
+/* ---- Base Styles ---- */
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* ---- Moneed Style Card (Soft Shadow, White bg, Rounded) ---- */
+.clean-card {
+  background-color: var(--card);
+  border-radius: var(--radius-2xl); /* 20px */
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0,0,0,0.02);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.clean-card-hover:hover {
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Pill buttons standard */
+.btn-pill {
+  border-radius: 9999px; /* Fully rounded */
+}
+
+/* Custom chart gradient fills based on reference */
+.chart-gradient-blue {
+  background: linear-gradient(180deg, #3b82f6 0%, rgba(59, 130, 246, 0) 100%);
+}
+
+.chart-gradient-green {
+  background: linear-gradient(180deg, #22c55e 0%, rgba(34, 197, 94, 0) 100%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  html {
+    @apply font-sans;
+  }
+}
