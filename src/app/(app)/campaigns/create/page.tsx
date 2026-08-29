@@ -96,7 +96,7 @@ export default function CreateCampaignPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url }),
-        signal: AbortSignal.timeout(120000) // Maksimal tunggu 2 menit di browser
+        signal: AbortSignal.timeout(240000) // Maksimal tunggu 4 menit di browser
       });
 
       const data = await response.json();

@@ -36,7 +36,7 @@ export async function extractTikTokProduct(url: string): Promise<ProductData> {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(requestBody),
-          signal: AbortSignal.timeout(180000) // Beri waktu 3 menit untuk Apify
+          signal: AbortSignal.timeout(240000) // Beri waktu 4 menit untuk Apify
         });
     } catch (e: any) {
       if (e.name === 'TimeoutError' || e.name === 'AbortError') {
