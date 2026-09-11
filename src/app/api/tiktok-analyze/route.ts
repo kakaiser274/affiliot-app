@@ -17,8 +17,12 @@ export async function POST(req: Request) {
       );
     }
 
+    // Extract the actual URL if the user pasted text containing a URL (e.g., from mobile app "Share" button)
+    const urlMatch = url.match(/(https?:\/\/[^\s]+)/);
+    const cleanUrl = urlMatch ? urlMatch[0] : url;
+
     // 1. Validate TikTok Shop URL
-    if (!isValidTikTokProductUrl(url)) {
+    if (!isValidTikTokProductUrl(cleanUrl)) {
       return NextResponse.json(
         { success: false, error: { code: 'INVALID_URL', message: 'The provided URL is not a valid TikTok Shop product URL.' } },
         { status: 400 }
@@ -28,7 +32,7 @@ export async function POST(req: Request) {
     // 2. Extract Product Data
     let productData;
     try {
-      productData = await extractTikTokProduct(url);
+      productData = await extractTikTokProduct(cleanUrl);
     } catch (error) {
       if (error instanceof ExtractionError) {
         return NextResponse.json(

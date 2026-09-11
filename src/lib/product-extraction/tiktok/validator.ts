@@ -1,5 +1,9 @@
-export function isValidTikTokProductUrl(urlStr: string): boolean {
+export function isValidTikTokProductUrl(text: string): boolean {
   try {
+    // Extract the actual URL if the user pasted text containing a URL (e.g., from mobile app "Share" button)
+    const urlMatch = text.match(/(https?:\/\/[^\s]+)/);
+    const urlStr = urlMatch ? urlMatch[0] : text;
+    
     const url = new URL(urlStr);
     
     // Check protocol
