@@ -19,25 +19,9 @@ export function isValidTikTokProductUrl(urlStr: string): boolean {
       return false;
     }
 
-    let productId = '';
-    
-    // For mobile short links, we don't strictly validate the path structure
-    // because they redirect to the actual product page later.
-    if (url.hostname === 'tokopedia.link' || url.hostname === 'vt.tiktok.com') {
-      productId = 'shortlink'; // Bypass strict ID extraction
-    } else if (url.hostname === 'shop-id.tokopedia.com') {
-      if (!url.pathname.startsWith('/pdp/')) return false;
-      const pathParts = url.pathname.replace('/pdp/', '').split('/');
-      productId = pathParts[pathParts.length - 1];
-    } else {
-      if (!url.pathname.startsWith('/view/product/')) return false;
-      const pathParts = url.pathname.replace('/view/product/', '').split('/');
-      productId = pathParts[0];
-    }
-    
-    if (!productId || productId.length === 0) {
-      return false;
-    }
+    // As long as the hostname is allowed, we trust the URL and let the backend scraper handle it.
+    // TikTok/Tokopedia frequently change their URL structures (e.g., query params instead of paths)
+    return true;
 
     return true;
   } catch (e) {
