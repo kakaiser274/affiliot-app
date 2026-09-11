@@ -17,7 +17,8 @@ export function isValidTikTokProductUrl(text: string): boolean {
       'shop.tiktok.com', 
       'vt.tiktok.com', // TikTok mobile short link
       'shop-id.tokopedia.com',
-      'tokopedia.link' // Tokopedia mobile short link
+      'tokopedia.link', // Tokopedia mobile short link
+      'vt.tokopedia.com' // Tokopedia alternative mobile short link
     ];
     if (!allowedHostnames.includes(url.hostname)) {
       return false;
