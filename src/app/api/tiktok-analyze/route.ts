@@ -29,10 +29,23 @@ export async function POST(req: Request) {
       );
     }
 
-    // 2. Extract Product Data
+    // 2. Resolve Mobile Short Links automatically
+    let resolvedUrl = cleanUrl;
+    try {
+      const parsedUrl = new URL(cleanUrl);
+      if (['vt.tiktok.com', 'tokopedia.link', 'vt.tokopedia.com'].includes(parsedUrl.hostname)) {
+        // Resolve the redirect
+        const response = await fetch(cleanUrl, { method: 'GET', redirect: 'follow' });
+        resolvedUrl = response.url;
+      }
+    } catch (e) {
+      console.warn("Failed to resolve short link, proceeding with original:", e);
+    }
+
+    // 3. Extract Product Data
     let productData;
     try {
-      productData = await extractTikTokProduct(cleanUrl);
+      productData = await extractTikTokProduct(resolvedUrl);
     } catch (error) {
       if (error instanceof ExtractionError) {
         return NextResponse.json(
