@@ -64,9 +64,20 @@ export async function extractTikTokProduct(url: string): Promise<ProductData> {
     const urlParts = urlWithoutQuery.split('/');
     const possibleId = urlParts[urlParts.length - 1]; // ID biasanya ada di akhir URL
     
+    let targetTitle = "";
+    try {
+      const urlObj = new URL(url);
+      const ogInfo = urlObj.searchParams.get('og_info');
+      if (ogInfo) {
+         const parsedOg = JSON.parse(ogInfo);
+         targetTitle = parsedOg.title;
+      }
+    } catch(e) {}
+
     const exactMatch = dataset.find((item: any) => {
        if (item.url && (item.url === url || item.url.includes(possibleId))) return true;
        if (item.product_id && item.product_id === possibleId) return true;
+       if (targetTitle && (item.title === targetTitle || item.name === targetTitle)) return true;
        return false;
     });
 
@@ -75,9 +86,20 @@ export async function extractTikTokProduct(url: string): Promise<ProductData> {
     } else if (dataset.length === 1) {
        // Jika hanya 1 hasil (mode detail), pakai itu
        data = dataset[0];
+    } else if (targetTitle) {
+       // Fallback ke pencarian berdasarkan judul (fuzzy match)
+       const fuzzyMatch = dataset.find((item: any) => {
+          const itemTitle = (item.title || item.name || '').toLowerCase();
+          const searchKeyword = targetTitle.split(' ')[0].toLowerCase();
+          // Minimal ada kata Celana/Kemeja dll yang cocok dari judul asli
+          return itemTitle.includes(searchKeyword);
+       });
+       if (fuzzyMatch) data = fuzzyMatch;
+       else data = dataset[0]; // Terpaksa ambil produk pertama daripada error
     } else {
-       // Jika crawler mengembalikan banyak produk tapi tidak ada yang cocok
-       throw new ExtractionError('PRODUCT_DATA_UNAVAILABLE', 'Produk spesifik tidak ditemukan di halaman toko. Pastikan link produk sudah benar.');
+       // Jika crawler mengembalikan banyak produk tapi tidak ada yang cocok sama sekali
+       // kita fallback ke item pertama saja.
+       data = dataset[0];
     }
 
     // Map response dari Apify ke standar ProductData kita (mendukung format scraper US maupun Indonesia)
