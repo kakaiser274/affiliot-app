@@ -237,7 +237,7 @@ export default function CreateCampaignPage() {
             product_image: productImageBase64 || null,
             tiktok_shop_url: url,
             status: 'active',
-            opportunity_score: analysisData.opportunity_score || 80,
+            opportunity_score: Math.round(analysisData.opportunity_score || 80),
             content_count: 0,
             progress: 0,
             category: productData.category,
