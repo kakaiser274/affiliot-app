@@ -60,7 +60,8 @@ export async function extractTikTokProduct(url: string): Promise<ProductData> {
 
     // Beberapa scraper mengembalikan daftar produk (misal rekomendasi produk). Kita cari yang paling cocok dengan URL kita.
     let data = dataset[0];
-    const urlParts = url.split('/');
+    const urlWithoutQuery = url.split('?')[0];
+    const urlParts = urlWithoutQuery.split('/');
     const possibleId = urlParts[urlParts.length - 1]; // ID biasanya ada di akhir URL
     
     const exactMatch = dataset.find((item: any) => {
