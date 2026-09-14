@@ -37,6 +37,7 @@ export default function DashboardPage() {
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [activeCampaigns, setActiveCampaigns] = useState<any[]>([]);
   const [totalActiveCampaigns, setTotalActiveCampaigns] = useState(0);
+  const [isLoadingCampaigns, setIsLoadingCampaigns] = useState(true);
   const upcomingSchedules: any[] = [];
   const coachInsights: any[] = [];
   const weeklyProgress = 0;
@@ -82,7 +83,10 @@ export default function DashboardPage() {
     }
 
     const fetchData = async () => {
-      if (!userId) return;
+      if (!userId) {
+        setIsLoadingCampaigns(false);
+        return;
+      }
       const supabase = createClient();
 
       // Get exact count first
@@ -117,6 +121,7 @@ export default function DashboardPage() {
           opportunityScore: row.opportunity_score || 0,
         })));
       }
+      setIsLoadingCampaigns(false);
     };
     
     fetchData();
@@ -155,8 +160,26 @@ export default function DashboardPage() {
         </motion.div>
       )}
 
-      {/* Header Actions (Moneed style top actions) */}
-      <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
+      {/* Empty State / Welcome Onboarding */}
+      {!loading && userId && !isLoadingCampaigns && totalActiveCampaigns === 0 ? (
+        <motion.div variants={item} className="flex flex-col items-center justify-center py-24 px-4 text-center">
+          <div className="w-24 h-24 mb-6 rounded-3xl bg-blue-100 flex items-center justify-center transform rotate-3 shadow-sm shadow-blue-200">
+             <Sparkles className="w-12 h-12 text-blue-600" />
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-4">Selamat datang di Markas Affiliot!</h2>
+          <p className="text-gray-500 max-w-lg mx-auto mb-10 text-base">
+            Anda belum memiliki campaign aktif. Mari mulai keajaibannya dan ciptakan konten viral pertama Anda dengan bantuan AI Coach.
+          </p>
+          <Link href="/campaigns/create" className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl overflow-hidden shadow-lg shadow-blue-500/30 hover:bg-blue-700 transition-all hover:scale-105 active:scale-95">
+             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+             <Target className="w-5 h-5 relative z-10" />
+             <span className="relative z-10">Mulai Riset Produk Pertamamu</span>
+          </Link>
+        </motion.div>
+      ) : (
+        <>
+          {/* Header Actions (Moneed style top actions) */}
+          <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
             <Wallet className="w-6 h-6" />
@@ -415,6 +438,8 @@ export default function DashboardPage() {
           </div>
         </motion.div>
       </div>
+      </>
+      )}
     </motion.div>
   );
 }
