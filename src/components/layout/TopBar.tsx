@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Sparkles, Bell, Upload, ChevronDown, LayoutDashboard, Megaphone, CalendarDays, MessageSquareText, Settings } from 'lucide-react';
+import { Sparkles, Bell, Upload, ChevronDown, LayoutDashboard, Megaphone, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -11,8 +11,6 @@ const navItems = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { label: 'Riset Produk', href: '/campaigns/create', icon: Sparkles },
   { label: 'Campaigns', href: '/campaigns', icon: Megaphone },
-  { label: 'Kalender', href: '/calendar', icon: CalendarDays },
-  { label: 'Chat', href: '/chat', icon: MessageSquareText },
   { label: 'Pengaturan', href: '/settings', icon: Settings },
 ];
 
