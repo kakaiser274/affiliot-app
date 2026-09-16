@@ -8,7 +8,7 @@ import { mockPreferences } from '@/lib/mock-data';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { cn } from '@/lib/utils';
 import {
-  User, Shield, CalendarDays, Brain, Settings as SettingsIcon,
+  User, Shield, Brain, Settings as SettingsIcon,
   LogOut, Globe, Bell, Check
 } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
@@ -17,7 +17,6 @@ import { Separator } from '@/components/ui/separator';
 const settingsSections = [
   { key: 'profile', label: 'Profil', icon: User },
   { key: 'account', label: 'Akun Google', icon: Shield },
-  { key: 'calendar', label: 'Integrasi Kalender', icon: CalendarDays },
   { key: 'ai', label: 'Provider AI', icon: Brain },
   { key: 'preferences', label: 'Preferensi', icon: SettingsIcon },
 ];
@@ -216,40 +215,6 @@ export default function SettingsPage() {
               </div>
             )}
 
-            {/* ===== CALENDAR INTEGRATION ===== */}
-            {activeSection === 'calendar' && (
-              <div className="clean-card p-6 md:p-8 space-y-8">
-                <h2 className="text-lg font-bold text-gray-900">Integrasi Kalender</h2>
-
-                {/* Google Calendar */}
-                <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100">
-                        <CalendarDays className="w-6 h-6 text-blue-600" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-bold text-gray-900">Google Calendar</p>
-                        <p className="text-xs font-medium text-gray-500">Sinkronisasi jadwal ke kalender utama</p>
-                      </div>
-                    </div>
-                    <Switch
-                      checked={prefs.calendarConnected}
-                      onCheckedChange={(checked) => setPrefs({ ...prefs, calendarConnected: checked })}
-                    />
-                  </div>
-                  {prefs.calendarConnected && (
-                    <div className="mt-4 pt-4 border-t border-gray-100">
-                      <div className="flex items-center gap-1.5 mb-1">
-                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                        <span className="text-xs font-bold text-green-600">Aktif & Tersinkronisasi</span>
-                      </div>
-                      <p className="text-[10px] font-medium text-gray-500">Sinkronisasi satu arah: Affiliot → Google Calendar</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
 
             {/* ===== AI PROVIDER ===== */}
             {activeSection === 'ai' && (
