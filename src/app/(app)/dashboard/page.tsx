@@ -210,9 +210,9 @@ export default function DashboardPage() {
             <div className="text-5xl font-extrabold text-gray-900 tracking-tight mb-2">
               <AnimatedCounter target={totalActiveCampaigns} />
             </div>
-            <div className="flex items-center gap-2 text-sm">
-              <span className="flex items-center gap-1 font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
-                <Sparkles className="w-3 h-3" /> Semangat!
+            <div className="flex items-center text-sm mt-1">
+              <span className="flex items-center gap-1.5 font-bold text-blue-600 mr-2">
+                <Sparkles className="w-4 h-4" /> Semangat!
               </span>
               <span className="text-gray-500 font-medium">Tingkatkan terus performamu hari ini.</span>
             </div>
@@ -227,13 +227,11 @@ export default function DashboardPage() {
           className="h-full"
         />
 
-        {/* Tugas (Expense style) */}
-        <div className="clean-card p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
-              <CheckCircle2 className="w-5 h-5 text-red-600" />
-            </div>
-            <span className="font-semibold text-gray-900">Tugas Harian</span>
+        {/* Tugas (Secondary Card) */}
+        <div className="bg-white rounded-3xl border border-gray-100 p-6 shadow-sm">
+          <div className="flex items-center gap-2.5 mb-4">
+            <CheckCircle2 className="w-5 h-5 text-red-500" />
+            <span className="font-bold text-gray-900">Tugas Harian</span>
           </div>
           <div className="flex items-baseline gap-2 mb-4">
             <span className="text-4xl font-bold text-gray-900">
@@ -310,13 +308,11 @@ export default function DashboardPage() {
       {/* ===== MIDDLE SECTION ===== */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        {/* Campaign List (Like Cashflow Chart) */}
+        {/* Campaign List */}
         <motion.div variants={item} className="lg:col-span-2 clean-card p-6">
           <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                <TrendingUp className="w-4 h-4 text-blue-600" />
-              </div>
+            <div className="flex items-center gap-2.5">
+              <TrendingUp className="w-5 h-5 text-blue-500" />
               <h2 className="text-base font-bold text-gray-900">Campaign Berjalan</h2>
             </div>
             <Link href={user ? "/campaigns" : "/login?message=unauthorized"} className="text-sm font-semibold text-blue-600 hover:text-blue-700">
@@ -398,11 +394,11 @@ export default function DashboardPage() {
             </div>
           </div>
           
-          {/* Calendar Mini */}
-          <div className="clean-card p-6 flex-1">
+          {/* Calendar Mini (Secondary Card) */}
+          <div className="bg-white rounded-3xl border border-gray-100 p-6 shadow-sm flex-1">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base font-bold text-gray-900">Jadwal Terdekat</h2>
-              <Link href={user ? "/calendar" : "/login?message=unauthorized"} className="text-xs font-semibold text-gray-500 hover:text-gray-900">
+              <Link href={user ? "/calendar" : "/login?message=unauthorized"} className="text-xs font-semibold text-gray-400 hover:text-blue-600 transition-colors">
                 Buka Kalender
               </Link>
             </div>
