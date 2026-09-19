@@ -63,7 +63,7 @@ ATURAN PENTING:
 
     // Call Gemini AI using vercel ai sdk
     const { text } = await generateText({
-      model: google('gemini-1.5-flash'), // Using gemini-1.5-flash
+      model: google('gemini-1.5-pro-latest'), // Using gemini-1.5-pro-latest
       system: systemPrompt,
       prompt: userPrompt,
     });

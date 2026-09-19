@@ -66,7 +66,7 @@ export async function POST(req: Request) {
 
     // 4. AI Analysis Layer
     const result = await generateObject({
-      model: google('gemini-1.5-flash'),
+      model: google('gemini-1.5-pro-latest'),
       system: `You are Affilot, an elite AI Affiliate Coach operating in "Ask the Council" mode. Your job is to critically evaluate products for affiliate creators with BRUTAL HONESTY and ZERO sugar-coating.
 Rules:
 - MUST respond in natural, conversational Indonesian language (Gunakan Bahasa Indonesia yang santai, gaul, mengalir, dan manusiawi layaknya mentor ke anak didiknya, namun SANGAT KRITIS dan TAJAM).
