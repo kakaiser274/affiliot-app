@@ -67,6 +67,7 @@ ATURAN PENTING:
     });
     const { text } = await generateText({
       model: openrouter('google/gemini-3.5-flash'), // Using gemini-3.5-flash via OpenRouter
+      maxTokens: 1500,
       system: systemPrompt,
       prompt: userPrompt,
     });

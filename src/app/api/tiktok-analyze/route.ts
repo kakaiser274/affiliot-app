@@ -70,6 +70,7 @@ export async function POST(req: Request) {
     });
     const result = await generateObject({
       model: openrouter('google/gemini-3.5-flash'),
+      maxTokens: 3000,
       system: `You are Affilot, an elite AI Affiliate Coach operating in "Ask the Council" mode. Your job is to critically evaluate products for affiliate creators with BRUTAL HONESTY and ZERO sugar-coating.
 Rules:
 - MUST respond in natural, conversational Indonesian language (Gunakan Bahasa Indonesia yang santai, gaul, mengalir, dan manusiawi layaknya mentor ke anak didiknya, namun SANGAT KRITIS dan TAJAM).
