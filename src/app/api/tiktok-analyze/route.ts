@@ -69,7 +69,7 @@ export async function POST(req: Request) {
       apiKey: process.env.OPENROUTER_API_KEY,
     });
     const result = await generateObject({
-      model: openrouter('google/gemini-flash-1.5'),
+      model: openrouter('google/gemini-3.5-flash'),
       system: `You are Affilot, an elite AI Affiliate Coach operating in "Ask the Council" mode. Your job is to critically evaluate products for affiliate creators with BRUTAL HONESTY and ZERO sugar-coating.
 Rules:
 - MUST respond in natural, conversational Indonesian language (Gunakan Bahasa Indonesia yang santai, gaul, mengalir, dan manusiawi layaknya mentor ke anak didiknya, namun SANGAT KRITIS dan TAJAM).

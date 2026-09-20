@@ -66,7 +66,7 @@ ATURAN PENTING:
       apiKey: process.env.OPENROUTER_API_KEY,
     });
     const { text } = await generateText({
-      model: openrouter('google/gemini-flash-1.5'), // Using gemini-flash-1.5 via OpenRouter
+      model: openrouter('google/gemini-3.5-flash'), // Using gemini-3.5-flash via OpenRouter
       system: systemPrompt,
       prompt: userPrompt,
     });
