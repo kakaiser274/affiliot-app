@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google';
+import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import { generateText } from 'ai';
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
@@ -61,9 +61,12 @@ ATURAN PENTING:
       userPrompt += `\n\nPengguna memberikan instruksi tambahan berikut:\n"${prompt}"\n\nPastikan instruksi ini diikuti.`;
     }
 
-    // Call Gemini AI using vercel ai sdk
+    // Call Gemini AI using vercel ai sdk via OpenRouter
+    const openrouter = createOpenRouter({
+      apiKey: process.env.OPENROUTER_API_KEY,
+    });
     const { text } = await generateText({
-      model: google('gemini-1.5-pro-latest'), // Using gemini-1.5-pro-latest
+      model: openrouter('google/gemini-flash-1.5'), // Using gemini-flash-1.5 via OpenRouter
       system: systemPrompt,
       prompt: userPrompt,
     });

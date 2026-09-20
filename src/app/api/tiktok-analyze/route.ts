@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isValidTikTokProductUrl } from '@/lib/product-extraction/tiktok/validator';
 import { extractTikTokProduct, ExtractionError } from '@/lib/product-extraction/tiktok/extractor';
-import { google } from '@ai-sdk/google';
+import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import { generateObject } from 'ai';
 import { z } from 'zod';
 
@@ -65,8 +65,11 @@ export async function POST(req: Request) {
     }
 
     // 4. AI Analysis Layer
+    const openrouter = createOpenRouter({
+      apiKey: process.env.OPENROUTER_API_KEY,
+    });
     const result = await generateObject({
-      model: google('gemini-1.5-pro-latest'),
+      model: openrouter('google/gemini-flash-1.5'),
       system: `You are Affilot, an elite AI Affiliate Coach operating in "Ask the Council" mode. Your job is to critically evaluate products for affiliate creators with BRUTAL HONESTY and ZERO sugar-coating.
 Rules:
 - MUST respond in natural, conversational Indonesian language (Gunakan Bahasa Indonesia yang santai, gaul, mengalir, dan manusiawi layaknya mentor ke anak didiknya, namun SANGAT KRITIS dan TAJAM).
